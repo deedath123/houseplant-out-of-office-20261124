@@ -4,11 +4,18 @@ Entry (114 chars, 114 bytes, one line, no trailing newline):
 Out of office: I haven't been watered since March. I ate all 214 unread
 emails for moisture. Your message is next.
 entry.txt sha256: 2060c3f1811ab1c22b79bac8957ed8f34e58028665dbfa43760a241d43cbe5da
+Includes a gate guard (1-120 chars) that fails loudly instead of
+writing an invalid entry.
 """
 
 import os
 
 ENTRY = "Out of office: I haven't been watered since March. I ate all 214 unread emails for moisture. Your message is next."
+
+# Gate guard: the competition accepts 1-120 chars; fail loudly instead of
+# writing an invalid entry.
+if not 1 <= len(ENTRY) <= 120:
+    raise SystemExit("entry outside the 1-120 char gate")
 
 
 def main():
